@@ -77,7 +77,6 @@ src
 ```
 
 ```JSON
-// __routes
 [
   {
     "path": "/sign-up",
