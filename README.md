@@ -17,7 +17,7 @@ export default {
       injectFile: "src/main.jsx", // required 从那个文件注入全局对象
       injectName: "__routes", // 全局对象名称 default:__routes
       separateFile: ["sign-up.jsx", "sign-in.jsx"], // 需要独立路由层级的页面将生成节点 default:[]
-      notFound: "_notFound" // 404 page default:`_notFound${ext}`
+      notFound: "_notFound", // 404 page default:`_notFound${ext}`
       layout: "_layout.jsx", // page layout default:`_layout${ext}`
     }),
   ],
