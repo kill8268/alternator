@@ -12,8 +12,8 @@ export default {
   plugins: [
     //...
     AlternatorPlugin({
-      routerDir: "src/pages", // 必填 要转换的页面目录
-      ext: ".jsx", // 必填 文件后缀 
+      routerDir: "src/pages", // required 要转换的页面目录
+      ext: ".jsx", // required 文件后缀 
       injectFile: "src/main.jsx", // required 从那个文件注入全局对象
       injectName: "__routes", // 全局对象名称 default:__routes
       separateFile: ["sign-up.jsx", "sign-in.jsx"], // 需要独立路由层级的页面将生成节点 default:[]
