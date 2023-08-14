@@ -23,7 +23,7 @@ export default function AlternatorPlugin({
   injectName = '__routes',
   injectFile = 'src/main.jsx',
 }) {
-  const dir = `${Path.join(process.cwd(), routerDir)}/`;
+  const dir = Path.normalize(`${Path.join(process.cwd(), routerDir)}/`);
   const separateFileSet = new Set(separateFile);
   const notFoundFile = `${notFound}${ext}`;
   const layoutFile = `${layout}${ext}`;
