@@ -33,6 +33,7 @@ export default function AlternatorPlugin({
     const path = filePath.replaceAll('.', '/');
     return path.replace(reg, (_, p1) => `:${p1}`);
   };
+
   const toRouter = (filepath, isDirectory, islayoutFile) => {
     const path = filepath.replace(dir, '/').split(Path.sep).join('/');
     const url = path.replace(ext, '').replace('/index', '').replace('index', '') || '/';
@@ -54,6 +55,7 @@ export default function AlternatorPlugin({
       element: path.split(Path.sep).join('/'),
     };
   };
+
   const getTree = (url = '') => {
     const itemPath = Path.join(dir, url);
     const stat = fs.statSync(itemPath);
@@ -77,6 +79,7 @@ export default function AlternatorPlugin({
     return route;
   };
   const filter = createFilter(Path.join(process.cwd(), injectFile));
+  const reg = new RegExp(injectName, 'g')
   return {
     name: 'alternator-plugin',
     transform(code, id) {
@@ -85,10 +88,7 @@ export default function AlternatorPlugin({
           ...separateFile.map((item) => toRouter(Path.join(dir, item))),
           getTree(),
         ];
-        return {
-          code: `Object.defineProperty(globalThis, '${injectName}', {value: ${JSON.stringify(tree)}, writable: false})
-${code}`,
-        };
+        return code.replace(reg, `${JSON.stringify(tree)}`);
       }
     },
   };
