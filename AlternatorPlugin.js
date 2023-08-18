@@ -33,29 +33,27 @@ export default function AlternatorPlugin({
     const path = filePath.replaceAll('.', '/');
     return path.replace(reg, (_, p1) => `:${p1}`);
   };
-
   const toRouter = (filepath, isDirectory, islayoutFile) => {
-    const path = filepath.replace(dir, '/');
+    const path = filepath.replace(dir, '/').split(Path.sep).join('/');
     const url = path.replace(ext, '').replace('/index', '').replace('index', '') || '/';
     if (isDirectory) {
       const route = {
         path: toRouterPath(url),
-        element: islayoutFile ? Path.join(path, layoutFile) : undefined,
+        element: islayoutFile ? Path.join(path, layoutFile).split(Path.sep).join('/') : undefined,
       };
       return route;
     }
     if (path.includes(notFoundFile)) {
       return {
         path: '*',
-        element: path,
+        element: path.split(Path.sep).join('/'),
       };
     }
     return {
       path: toRouterPath(url),
-      element: path,
+      element: path.split(Path.sep).join('/'),
     };
   };
-
   const getTree = (url = '') => {
     const itemPath = Path.join(dir, url);
     const stat = fs.statSync(itemPath);
